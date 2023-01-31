@@ -1,8 +1,50 @@
 @import (reference) '~antd/es/style/themes/index';
 
+
+.container{
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: #f0f2f5;
+  overflow: hidden;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 80px;
+  }
+  .footer{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+}
+.avatar {
+  border-radius: 8px;
+  overflow: hidden;
+}
 .pre {
   margin: 12px 0;
   padding: 12px 20px;
   background: @input-bg;
   box-shadow: @card-shadow;
 }
+h1 {
+  font-weight: 600;
+  margin: 20px auto;
+  font-size: 36px;
+  line-height: 50px;
+  font-family: "Microsoft Yahei";
+}
+.disc {
+  font-family: "Microsoft Yahei";
+  font-size: 16px;
+  color: rgba(0,0,0,0.54);
+  margin-bottom: 20px;
+}
+

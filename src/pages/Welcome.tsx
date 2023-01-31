@@ -1,39 +1,23 @@
 import { PageContainer } from '@ant-design/pro-components';
-import { Alert, Card, Typography } from 'antd';
+import { Avatar, Button } from 'antd';
 import React from 'react';
+import { Link } from 'umi';
 import styles from './Welcome.less';
-const CodePreview: React.FC = ({ children }) => (
-  <pre className={styles.pre}>
-    <code>
-      <Typography.Text copyable>{children}</Typography.Text>
-    </code>
-  </pre>
-);
+import Footer from "@/components/Footer";
 const Welcome: React.FC = () => {
   return (
-    <PageContainer>
-      <Card>
-        <Alert
-          message={'更快更强的重型组件，已经发布。'}
-          type="success"
-          showIcon
-          banner
-          style={{
-            margin: -12,
-            marginBottom: 24,
-          }}
-        />
-        <Typography.Text strong>
-          <a
-            href="https://procomponents.ant.design/components/table"
-            rel="noopener noreferrer"
-            target="__blank"
-          >
-            欢迎使用
-          </a>
-        </Typography.Text>
-        <CodePreview>yarn add @ant-design/pro-components</CodePreview>
-      </Card>
+    <PageContainer className={styles.container}>
+      <div className={styles.content}>
+        <Avatar shape="square" size={320} className={styles.avatar}  src='/logo.jpg' alt='snail run' />
+        <h1>你好，鱼皮哥！</h1>
+        <span className={styles.disc}>我是不拖延同学，希望能和优秀的人一起成长</span>
+        <Button type="primary" shape="round" size='large' onClick={()=>history}>
+          <Link to="/premd">Markdown预览</Link>
+        </Button>
+      </div>
+     <div className={styles.footer}>
+       <Footer />
+     </div>
     </PageContainer>
   );
 };
