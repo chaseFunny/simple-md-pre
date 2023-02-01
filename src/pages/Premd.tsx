@@ -1,40 +1,44 @@
 import { PageHeaderWrapper } from '@ant-design/pro-components';
 import ReactMarkdown from 'react-markdown';
+import { history } from 'umi';
 import MarkNav from 'markdown-navbar';
-import { Button } from 'antd';
+import { Button, Modal } from 'antd';
 import React, { useState } from 'react';
-import styles from './Premd.less';
+import  './Premd.less';
+import "markdown-navbar/dist/navbar.css";
+import article from './article';
+import TextArea from 'antd/lib/input/TextArea';
+import { UpCircleFilled } from '@ant-design/icons';
 
 const Admin: React.FC = () => {
-  const article = `
-  ## MarkdownPreview
-
-  > todo: React component preview markdown text.
-  ## 二级标题
-
-> 这个是声明
-
-# 一级
-
-#### 四级
-
-###### 六级
-
-
-  `;
+  console.log(history, 'history');
+  
   const [popupVisibility, setPopupShow] = useState(false);
+  const [articleState, setArticle] = useState(article)
+  let temText = ''
   const [navVisible, setNavVisible] = useState(true);
-  const showEdit = () => {
+  const changeModel = (num: number = 0) => {
+    if(num === 1) {
+      setArticle(temText)
+      history.push(history.location.pathname)
+    }
     setPopupShow(!popupVisibility);
   };
+  const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    console.log('Change:', e.target.value);
+    temText = e.target.value
+  };
+  const goTop = () => {
+    window?.scrollTo(0,0)
+    history.push(history.location.pathname)
+  };
   return (
-    <PageHeaderWrapper content={' online markdown edit and preview'} className={styles.box}>
-      {popupVisibility && <div>明天做完 加油 小张！</div>}
-      <Button type="primary" shape="round" size="small" className={styles.btn} onClick={showEdit}>
+    <PageHeaderWrapper content={' online markdown edit and preview'} className="box">
+      <Button type="primary" shape="round" size="small" className="btn" onClick={() => changeModel()}>
         编辑当前文本
       </Button>
-      <div className={styles.content}>
-        <ReactMarkdown source={article} />
+      <div className="content">
+        <ReactMarkdown source={articleState} />
       </div>
       <div className={`nav-container ${navVisible ? 'show' : 'hide'}`}>
         <div
@@ -43,10 +47,27 @@ const Admin: React.FC = () => {
             setNavVisible(!navVisible);
           }}
         >
-          {navVisible ? 'MENU →' : '← MENU'}
+          {navVisible ? '目录 →' : '← 目录'}
         </div>
-        <MarkNav source={article} />
+        <MarkNav source={articleState} />
       </div>
+      <Modal
+        title="更新markdown内容"
+        open={popupVisibility}
+        onOk={()=>{changeModel(1)}}
+        onCancel={() => changeModel()}
+        okText="确认"
+        cancelText="取消"
+      >
+       <TextArea
+          autoSize
+          defaultValue={articleState}
+          style={{ minHeight: 140, maxHeight:300, marginBottom: 24,overflowY: 'scroll', }}
+          onChange={onChange}
+          placeholder="请输入"
+        />
+      </Modal>
+      <UpCircleFilled className='goTop' onClick={goTop} />
     </PageHeaderWrapper>
   );
 };
