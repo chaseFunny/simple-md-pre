@@ -7,6 +7,13 @@
     component: './Premd',
   },
   {
+    path: '/prepdf',
+    layout: false,
+    name: '在线PDF',
+    icon: 'smile',
+    component: './PrePDF',
+  },
+  {
     path: '/welcome',
     layout: false,
     name: 'welcome to visit this site ❤️',
