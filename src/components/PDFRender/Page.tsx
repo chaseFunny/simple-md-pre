@@ -12,5 +12,5 @@ export const Page = (props: { src: string; io: any; index: number }) => {
     ref.current?.setAttribute('index', String(index));
     return () => io.unobserve(ref.current);
   });
-  return <img className="page-img" src={src} ref={ref} />;
+  return <img className="page-img page" src={src} ref={ref} />;
 };
